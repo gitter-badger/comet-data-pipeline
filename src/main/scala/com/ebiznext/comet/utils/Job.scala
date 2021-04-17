@@ -154,6 +154,7 @@ trait SparkJob extends JobBase {
             .map(_.split("=")(0))
             .toList
             .mkString(",")
+          logger.info(s"found partition ($partitionedCols) for table $fullTableName")
           Some(s"ANALYZE TABLE $fullTableName PARTITION ($partitionedCols) COMPUTE STATISTICS")
         } match {
           case Success(value) =>
